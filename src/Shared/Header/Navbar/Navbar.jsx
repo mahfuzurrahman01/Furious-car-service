@@ -6,7 +6,7 @@ const Navbar = () => {
         <li className='font-semibold'><Link to='/'>Home</Link></li>
     </>
     return (
-        <div className="navbar h-20 mb-20 bg-base-100" data-theme='light'>
+        <div className="navbar h-20 mb-12 pt-12 bg-base-100" data-theme='light'>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -16,7 +16,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/'><img src={logo} alt="" /></Link>
+                <Link to='/'><img src={logo} alt="" className='w-24 h-20' /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
