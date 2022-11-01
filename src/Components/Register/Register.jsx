@@ -1,7 +1,10 @@
-import React from 'react';
+import { Result } from 'postcss';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../Context/AuthProvider';
 const Register = () => {
+    const {createUser} = useContext(AuthContext)
     const signupHandle = event => {
         event.preventDefault()
         const form = event.target;
@@ -9,6 +12,14 @@ const Register = () => {
         const email =form.email.value;
         const password = form.password.value;
         console.log(email,password,name)
+        createUser(email,password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+        })
+        .catch(err =>{
+            console.error(err.massage)
+        })
     }
     return (
         <div className='flex justify-center items-center my-40'>
