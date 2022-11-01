@@ -12,7 +12,7 @@ const About = () => {
                 <div className='w-1/2 flex flex-col gap-4'>
                     <p className='text-red-500 font-bold text-2xl'>About us</p>
                     <div className='flex flex-col gap-3'>
-                        <h1 className="text-4xl font-semibold">
+                        <h1 className="text-4xl font-bold">
                             We are qualified <br />
                             & of experience <br />
                             in this field</h1>
