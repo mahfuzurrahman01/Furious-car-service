@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const OrderRow = ({ order,deleteHandle }) => {
-   
+const OrderRow = ({ order, deleteHandle, updateHandle }) => {
+
     const [service, setService] = useState({})
     useEffect(() => {
         fetch(`http://localhost:5000/services/${order.serviceId}`)
@@ -9,7 +9,7 @@ const OrderRow = ({ order,deleteHandle }) => {
             .then(data => setService(data))
     }, [order?.serviceId])
 
-    
+
     return (
         <div className="flex flex-col p-5 rounded-md sm:flex-row sm:justify-between my-5 bg-gray-50">
             <div className="flex w-full space-x-2 sm:space-x-4">
@@ -21,8 +21,8 @@ const OrderRow = ({ order,deleteHandle }) => {
                             <p className="text-sm dark:text-gray-400">Classic</p>
                         </div>
                         <div className="text-right">
-                            <p className="text-lg font-semibold">59.99€</p>
-                            <button className='text-gray-50 bg-red-400 rounded text-xs px-1'>Pending</button>
+                            <p className="text-lg font-semibold">${order.price}</p>
+                            <button onClick={() => updateHandle(order._id)} className={order.status === 'Approved' ? 'text-gray-50 bg-green-400 rounded text-xs px-1':'text-gray-50 bg-red-400 rounded text-xs px-1'}>{order.status ? order.status : 'Pending'}</button>
                         </div>
                     </div>
                     <div className="flex text-sm divide-x">

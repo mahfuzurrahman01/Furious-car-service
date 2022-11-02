@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg'
 import { AuthContext } from '../../../Context/AuthProvider';
 const Navbar = () => {
-    const {user} = useContext(AuthContext)
+    const {user,logOut} = useContext(AuthContext)
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
         {
           user?.email ? <><li className='font-semibold'><Link to='/orders'>Orders</Link></li></> : <li className='font-semibold'><Link to='/login'>Login</Link></li>  
         }
     </>
+    const logoutHandle = () =>{
+       logOut()
+       .then(()=>{})
+       .catch(err => console.error(err))
+    }
     return (
         <div className="navbar h-20 mb-12 pt-12 bg-base-100" data-theme='light'>
             <div className="navbar-start">
@@ -31,7 +36,7 @@ const Navbar = () => {
             <div className="navbar-end flex gap-1">
                 <button className="text-red-500 rounded-md hover:bg-red-500 hover:text-white border duration-300 border-red-500 bg-transparent py-1 px-3">Appointment</button>
                 {
-                    user?.email && <button className="text-red-500 rounded-md hover:bg-red-500 hover:text-white border duration-300 border-red-500 bg-transparent py-1 px-3">Logout</button>
+                    user?.email && <button onClick={logoutHandle} className="text-red-500 rounded-md hover:bg-red-500 hover:text-white border duration-300 border-red-500 bg-transparent py-1 px-3">Logout</button>
                 }
             </div>
         </div>

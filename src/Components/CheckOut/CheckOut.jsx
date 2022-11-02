@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import {  useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const CheckOut = () => {
+    const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const service = useLoaderData()
     const { _id, price, title } = service
@@ -37,6 +38,7 @@ const CheckOut = () => {
                 console.log(data)
                 if (data.acknowledged === true) {
                     alert('Order placed successfully')
+                    navigate('/orders')
                 }
             })
             .catch(err => console.error(err))

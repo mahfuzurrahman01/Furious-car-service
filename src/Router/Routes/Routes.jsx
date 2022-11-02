@@ -5,6 +5,7 @@ import Main from "../../Layouts/Main/Main";
 import Register from "../../Components/Register/Register";
 import CheckOut from "../../Components/CheckOut/CheckOut";
 import Orders from "../../Components/Orders/Orders";
+import Private from "../../Components/Private/Private";
 
 export const router = createBrowserRouter([
     {
@@ -30,11 +31,11 @@ export const router = createBrowserRouter([
             {
                 path:'/checkout/:id',
                 loader:({params}) => fetch(`http://localhost:5000/services/${params.id}`),
-                element:<CheckOut></CheckOut>
+                element:<Private><CheckOut></CheckOut></Private>
             },
             {
                 path:'/orders',
-                element:<Orders></Orders>
+                element:<Private><Orders></Orders></Private>
             }
         ]
     }
