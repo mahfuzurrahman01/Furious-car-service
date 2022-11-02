@@ -1,9 +1,10 @@
 
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Context/AuthProvider';
 const Register = () => {
+    const navigate = useNavigate()
     const {createUser} = useContext(AuthContext)
     const signupHandle = event => {
         event.preventDefault()
@@ -16,6 +17,8 @@ const Register = () => {
         .then(result =>{
             const user = result.user;
             console.log(user)
+            navigate('/')
+
         })
         .catch(err =>{
             console.error(err.massage)
@@ -44,7 +47,7 @@ const Register = () => {
                         <a rel="noopener noreferrer" href="# ">Forgot Password?</a>
                     </div>
                 </div>
-                <button type="submit"  className="block w-full p-3 text-center rounded-sm  bg-red-500 text-white" >Sign in</button>
+                <button type="submit"  className="block w-full p-3 text-center rounded-sm  bg-red-500 text-white" >Sign up</button>
               
             </form>
             <div className="flex items-center pt-4 space-x-1">
