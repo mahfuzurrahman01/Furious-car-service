@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const OrderRow = ({ order }) => {
+const OrderRow = ({ order,deleteHandle }) => {
+   
     const [service, setService] = useState({})
     useEffect(() => {
         fetch(`http://localhost:5000/services/${order.serviceId}`)
@@ -8,19 +9,7 @@ const OrderRow = ({ order }) => {
             .then(data => setService(data))
     }, [order?.serviceId])
 
-    const deleteHandle = (id) => {
-        fetch(`http://localhost:5000/order/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                alert('Order removed')
-                if (data.deletedCount === 1) {
-                    console.log('done')
-                }
-            })
-    }
+    
     return (
         <div className="flex flex-col p-5 rounded-md sm:flex-row sm:justify-between my-5 bg-gray-50">
             <div className="flex w-full space-x-2 sm:space-x-4">
@@ -37,7 +26,7 @@ const OrderRow = ({ order }) => {
                         </div>
                     </div>
                     <div className="flex text-sm divide-x">
-                        <button onClick={() => deleteHandle(order.serviceId)} type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
+                        <button onClick={() => deleteHandle(order._id)} type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current">
                                 <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
                                 <rect width="32" height="200" x="168" y="216"></rect>

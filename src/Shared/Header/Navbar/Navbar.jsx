@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg'
+import { AuthContext } from '../../../Context/AuthProvider';
 const Navbar = () => {
+    const {user} = useContext(AuthContext)
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
-        <li className='font-semibold'><Link to='/login'>Login</Link></li>
-        
+        {
+          user?.email ? <><li className='font-semibold'><Link to='/orders'>Orders</Link></li></> : <li className='font-semibold'><Link to='/login'>Login</Link></li>  
+        }
     </>
     return (
         <div className="navbar h-20 mb-12 pt-12 bg-base-100" data-theme='light'>
@@ -25,8 +28,11 @@ const Navbar = () => {
                     {menuItems}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <button className="btn btn-outline btn-error">Appointment</button>
+            <div className="navbar-end flex gap-1">
+                <button className="text-red-500 rounded-md hover:bg-red-500 hover:text-white border duration-300 border-red-500 bg-transparent py-1 px-3">Appointment</button>
+                {
+                    user?.email && <button className="text-red-500 rounded-md hover:bg-red-500 hover:text-white border duration-300 border-red-500 bg-transparent py-1 px-3">Logout</button>
+                }
             </div>
         </div>
     );
